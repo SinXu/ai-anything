@@ -1,12 +1,11 @@
 <script lang="ts" setup>
-import { OpenAIMessages, ToolItem } from "~~/types";
+import { OpenAIMessages } from "~~/types";
 
 const props = defineProps<{
   contexts: OpenAIMessages;
   result: string;
   loading: boolean;
   error: any;
-  tool: ToolItem;
 }>();
 const history = computed(() =>
   props.contexts.filter((v) => v.role !== "system")
@@ -22,14 +21,10 @@ watch(
     });
   }
 );
-
-function handleDownload() {
-  downloadJson(props.tool.name, props.contexts);
-}
 </script>
 
 <template>
-  <div ref="innerRef" flex flex-col gap-y-6 class="group">
+  <div ref="innerRef" flex flex-col gap-y-6>
     <el-empty v-if="!history.length">
       <template #image>
         <div
@@ -45,15 +40,5 @@ function handleDownload() {
       role="assistant"
       :content="result"
     ></ToolChatItem>
-    <div
-      v-if="!loading && history.length"
-      class="opacity-0 group-hover:opacity-100 transition-opacity"
-    >
-      <el-button-group size="small">
-        <el-button @click="handleDownload" title="Download Raw JSON">
-          <div class="i-carbon-download"></div>
-        </el-button>
-      </el-button-group>
-    </div>
   </div>
 </template>

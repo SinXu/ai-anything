@@ -35,18 +35,16 @@ function handleUpdateName(id: string, name: string) {
       </template>
     </el-empty>
 
-    <div flex gap-2 flex-col>
-      <div v-for="item in history" px-4>
-        <tool-history-item
-          @change="handleClickHistory(item)"
-          @remove="remove(item.id)"
-          @update="handleUpdateName(item.id, $event)"
-          :active="item.id === currentHistoryId"
-          :id="item.id"
-          :name="item.name"
-          :context="item.context"
-        />
-      </div>
+    <div v-for="item in history" px-4 flex gap-2>
+      <tool-history-item
+        @change="handleClickHistory(item)"
+        @remove="remove(item.id)"
+        @update="handleUpdateName(item.id, $event)"
+        :active="item.id === currentHistoryId"
+        :id="item.id"
+        :name="item.name"
+        :context="item.context"
+      />
     </div>
   </el-scrollbar>
 </template>

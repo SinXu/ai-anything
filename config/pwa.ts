@@ -33,7 +33,6 @@ export const pwa: ModuleOptions = {
   },
   workbox: {
     globPatterns: ["**/*.{js,css,html,txt,png,ico,svg}"],
-    navigateFallbackDenylist: [/^\/api\//],
     navigateFallback: "/",
     cleanupOutdatedCaches: true,
     runtimeCaching: [
@@ -50,7 +49,7 @@ export const pwa: ModuleOptions = {
   registerWebManifestInRouteRules: true,
   writePlugin: true,
   devOptions: {
-    enabled: false,
+    enabled: true,
     navigateFallback: scope,
   },
 };
